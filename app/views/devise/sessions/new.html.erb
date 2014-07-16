@@ -1,0 +1,57 @@
+<style type="text/css">
+[role="body"]{
+	background-color: rgba(238,238,238,1)
+}
+</style>
+<header role="banner">
+			<a id="logo" href="/">Diparzza</a>
+</header><!-- /navbar -->
+
+<div class="container ">
+        <div role="main" id="main" class="bg-grey">
+			<h2>
+				Diparzza, Here Your Study Start.
+			</h2>
+			<p class="separator">
+				Sign in with your email
+			</p>
+			
+			
+			<div class="">
+				<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+				<div class="form-horizontal tile bg-grey" id="registration-form">
+					<h4>Teacher Registration</h4>
+					
+					<div class="input">
+						<%= f.email_field :email, autofocus: true, placeholder:"Your School Email With .edu", class:"form-control flat" %>
+					</div>
+					
+					<div class="input">
+						<%= f.password_field :password, autocomplete: "off",class:"form-control flat",placeholder:"Enter Your Password" %>
+					</div>
+					
+					<% if devise_mapping.rememberable? -%>
+					    <div><%= f.check_box :remember_me, class: 'check-box hidden' %> <%= f.label :remember_me, class: 'pointer-cursor', id: "reg-remember" %></div>
+					<% end -%>
+
+					
+					<div>
+						
+						<%= f.submit "Let's GO!", class: "btn btn-primary" %>
+
+					</div>
+					
+					<div style="margin-top:10px">
+						<style>
+							.btn-sep{margin: 0 5px -3px 5px; border-left: 1px solid #3f3f3f!important;height:1em;}
+						</style>
+						<%= render "devise/shared/links" %>
+					</div>
+					
+						
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+

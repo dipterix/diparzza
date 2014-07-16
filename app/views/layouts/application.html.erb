@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Diparzza</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Loading Bootstrap -->
+    <link href="/assets/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="/assets/flat-ui.css" rel="stylesheet">
+	<link href="/assets/layer.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="/assets/html5shiv.js"></script>
+      <script src="/assets/respond.min.js"></script>
+    <![endif]-->
+  <%= csrf_meta_tags %>
+  </head>
+<body role="body">
+
+<!-- System information -->
+
+<div class="notification-pane">
+  <% flash.each do |name, msg| %>
+    <%= content_tag(:div, msg, class: "alert alert-info") %>
+  <% end %>
+
+</div>
+
+<%= yield %>
+
+
+
+<!-- Load JS here for greater good =============================-->
+
+<script data-turbolinks-track="true" src="/assets/jquery-2.0.3.min.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/jquery_ujs.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/turbolinks.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/pages.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/respond.min.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/typeahead.js?body=1"></script>
+
+
+    <script src="/assets/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="/assets/jquery.ui.touch-punch.min.js"></script>
+    <script src="/assets/bootstrap.min.js"></script>
+    <script src="/assets/bootstrap-select.js"></script>
+    <script src="/assets/bootstrap-switch.js"></script>
+    <script src="/assets/flatui-checkbox.js"></script>
+    <script src="/assets/flatui-radio.js"></script>
+    <script src="/assets/jquery.tagsinput.js"></script>
+    <script src="/assets/jquery.placeholder.js"></script> 
+
+
+
+<script data-turbolinks-track="true" src="/assets/application.js?body=1"></script>
+
+  
+</body>
+</html>
+ 

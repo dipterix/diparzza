@@ -1,0 +1,59 @@
+<%= devise_error_messages! %>
+
+<header role="banner">
+			<a id="logo" href="/">Diparzza</a>
+		  
+	</header><!-- /navbar -->
+  
+    <div class="container">
+        <div role="main" id="main">
+			<h2>
+				Diparzza, Easy Teaching, Enjoy Studying.
+			</h2>
+			
+			<div>
+				<p class="action-discr">
+				
+				Let's get started!
+				</p>
+			</div>
+			<p class="separator">
+				Sign up with your email
+			</p>
+			
+			
+			<div class="">
+				<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+				<div class="form-horizontal hero-unit" id="registration-form">
+					<h4>Teacher Registration</h4>
+					
+
+					<div class="input">
+						<%= f.email_field :email, autofocus: true, placeholder:"Your School Email With .edu", class:"form-control flat" %>
+					</div>
+					
+					<div class="input input-q-p2-left">
+						<%= f.password_field :password, autocomplete: "off",class:"form-control flat",placeholder:"Enter Your Password" %>
+					</div>
+					
+					<div class="input input-q-p2-right">
+						<%= f.password_field :password_confirmation, autocomplete: "off",class:"form-control flat",placeholder:"Enter Your Password" %>
+					</div>
+
+					<p class="input">
+						<small>By signing up, I agree to the Diparzza <br />terms and conditions</small>
+					</p>
+					
+					<div><%= f.submit "Create Your Account",class:"btn btn-primary" %> &nbsp;
+						<%= render "devise/shared/links" %>
+					</div>
+						
+						
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+    <!-- /.container -->
+

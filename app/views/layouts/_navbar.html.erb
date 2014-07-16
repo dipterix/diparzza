@@ -1,0 +1,31 @@
+<header role="navbar">
+		<nav class="navbar navbar-inverse" role="navigation">
+		  <div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+			  <span class="sr-only">Toggle navigation</span>
+			</button>
+			<a class="navbar-brand" id="logo" href="#">Diparzza</a>
+
+		  </div>
+		  <div class="collapse navbar-collapse" id="navbar-collapse-01">
+		  	<% if user_signed_in? %>
+				<ul class="nav navbar-nav">           
+			  		<li class="active"><a href="#fakelink">STAT 640</a></li>
+			  		<li><a href="#fakelink">ECE 355</a></li>
+				</ul>           
+			
+				<ul class="nav navbar-nav navbar-right">   
+				
+					<li><%= link_to "Account Settings", edit_user_registration_path %></li>
+  					<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+  			<% else %>
+  				<ul class="nav navbar-nav navbar-right">  
+  					<li><%= link_to "Log in", new_user_session_path, class: "btn" %></li>
+  					<li><%= link_to "Sign up", new_user_registration_path, class: "btn" %></li>
+			<% end %>
+				</ul>  
+		  </div>
+			<!-- /.navbar-collapse -->
+		</nav><!-- /navbar -->
+		
+	</header>
