@@ -43,7 +43,7 @@
         <div class="input">
           <label class="input-q-f1">Nickname:</label>
           <div class="input-group">
-            <input id="inputName" type="text" value="Dipterix" class="form-control flat" disabled /> 
+            <%= f.text_field :nickname, autocomplete: "on", placeholder: "Enter Your Nickname. It will be shown to the others", value: current_user.nickname, class: "form-control flat" %>
             <label class="input-group-addon">Change it</label>
           </div>
         </div>
@@ -51,18 +51,31 @@
         <div class="input">
           <label class="input-q-f1">Real Name:</label>
           <div class="input-group">
-            <input id="inputRealName" type="text" value="Dipterix Wang" class="form-control flat" /> 
+            <%= f.text_field :realname, autocomplete: "on", placeholder: "Your Real Name, will only be displayed within your class.", value: current_user.realname, class: "form-control flat" %>
             <label class="input-group-addon invisible">Change it</label>
           </div>
         </div>
         
         <div class="input">
-          <label class="input-q-f1">School/Association:</label>
+          <label class="input-q-f1">School/Institution:</label>
           <div class="input-group">
-            <input id="inputRealName" type="text" value="University of Science and Technology of China" class="form-control flat" /> 
+            <%= f.text_field :institution, autocomplete: "on", placeholder: "Your School", value: current_user.institution, class: "form-control flat" %>
             <label class="input-group-addon invisible">Change it</label>
           </div>
-        </div>            
+        </div> 
+
+        <div class="input">
+          <label class="input-q-f1">Department:</label>
+          <div class="input-group">
+            <%= f.text_field :dept, autocomplete: "on", placeholder: "If you are a teacher, please enter your Department", value: current_user.dept, class: "form-control flat" %>
+            <label class="input-group-addon invisible">Change it</label>
+          </div>
+        </div>      
+
+        <div class="input">      
+          <label class="input-q-f1">Teacher Status:</label>
+          <%= f.check_box :status, 'data-toggle' => "switch", checked: current_user.status %>
+        </div>
             
         <%= f.submit "Confirm Changes", class: "btn btn-primary top-mg-10" %>
       </div>
