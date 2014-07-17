@@ -6,7 +6,7 @@ class ClassroomsController < ApplicationController
   # GET /classrooms
   # GET /classrooms.json
   def index
-    @classrooms = Classroom.all
+    @classrooms = Classroom.all.order("num ASC")
   end
 
   # GET /classrooms/1

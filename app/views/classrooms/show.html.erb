@@ -12,10 +12,14 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 				<h6>Dash Board</h6>
 				<div class="course-sidebar">
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width' role="active">Introduction</label>
+						<label href="#fui-button" class='btn-sidebar full-width' role="active" target="intro">Introduction</label>
+						<div class="hidden">
+							<%= @classroom.intro %>
+						</div>
 					</div>
+
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width'>Process Schedule</label>
+						<label href="#fui-button" class='btn-sidebar full-width' >Process Schedule</label>
 					</div>
 					<div class="full-width">
 						<label href="#fui-button" class='btn-sidebar full-width'>Announcement</label>
@@ -33,8 +37,38 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 			</div>
 			
 			<div class="tile bg-clear col-md-10" role="main">
-				
-				<%= render "classrooms/shared/coursecontent" %>
+				<%= link_to 'ajax show', classroom_path, :remote => true, :method => 'GET', "data-type" => :json, :id => "update_foobar" %>
+				<div id="foobar"></div>
+				<script type="text/javascript">
+				$(function() {
+				    $('#update_foobar').bind("ajax:success", function(event, data, status, x) {
+				        var foobar = $('#foobar');
+				        alert(status);
+				        alert(data.num)
+				        foobar.html( status );
+				    });
+				});
+				</script>
+
+
+
+				<div class="course-main-pane">
+					<%= render "classrooms/shared/coursecontent" %>
+				</div>
 			</div>
 		</div>
 </div>
+
+
+
+<script type="text/javascript">
+	$("label.btn-sidebar").click(function(){
+		target = $(this).attr('target');
+		isActiveBtn = $(this).attr('role')=="active";
+		if(!isActiveBtn){
+			$("label.btn-sidebar[role='active']").attr('role','inactive');
+			$(this).attr('role', "active");
+			$(".course-main-pane").fadeTo(1000, 0.3)
+		}
+	})
+</script>
