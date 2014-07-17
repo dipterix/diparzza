@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :classrooms
+
   devise_for :users
   root 'pages#home'
   get 'course' => 'pages#course'

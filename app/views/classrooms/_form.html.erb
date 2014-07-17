@@ -1,0 +1,36 @@
+<%= form_for(@classroom) do |f| %>
+  <% if @classroom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@classroom.errors.count, "error") %> prohibited this classroom from being saved:</h2>
+
+      <ul>
+      <% @classroom.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-md-3">
+    <div class="field">
+      <h6>Course Number</h6>
+      <%= f.text_field :num, autofocus: true, class: "form-control flat", required: true, placeholder: "E.g. MATH 101" %>
+    </div>
+    <div class="field">
+      <h6>Course Name</h6>
+      <%= f.text_field :name, class: "form-control flat", required: true, placeholder: "E.g. Univariate Calculus" %>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <div class="form-group">
+        <h6>Introduction</h6>
+        <%= f.text_area :intro, autofocus: true, class: "form-control course-intro-pane", placeholder: "Please fill in this part, which will be displayed on course index...\b\n E.g. Your Course Info\n Your and your TA's contacts" %>
+    </div>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "A new Course Begins!", class: "btn btn-primary float-right" %>
+  </div>
+<% end %>

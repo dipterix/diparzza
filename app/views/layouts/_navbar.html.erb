@@ -8,21 +8,48 @@
 
 		  </div>
 		  <div class="collapse navbar-collapse" id="navbar-collapse-01">
-		  	<% if user_signed_in? %>
+
+	<% if user_signed_in? %>
+		  		
+
 				<ul class="nav navbar-nav">           
-			  		<li class="active"><a href="#fakelink">STAT 640</a></li>
-			  		<li><a href="#fakelink">ECE 355</a></li>
-				</ul>           
-			
-				<ul class="nav navbar-nav navbar-right">   
+			  		<li class="dropdown-toggle" data-toggle="dropdown">
+			  			<a href="#fakelink">My Course<span class="caret"></span></a>
+					</li>
+
+					<span class="dropdown-arrow dropdown-arrow-inverse dropdown-arrow-navbar"></span>
+					<div class="dropdown-menu dropdown-inverse dropdown-menu-navbar">
+						<div class="row clearfix align-left">
+							<div class="col-md-3">
+		<% current_user.classrooms.each_with_index do |classroom, index| %>
+									
+			  						<a class="btn dropdown-btn-navbar" href= "/classrooms/<%= classroom.id %>" target="nav-showpane-<%= index %>">
+			  							<%= classroom.num %>: <%= classroom.name %>
+			  						</a>
+		  							<div class="hidden" id="nav-showpane-<%= index %>">
+										<%= classroom.intro %>
+									</div>
+		 <% end %>
+		  					</div>
+		  					<div class="col-md-9" id="dropdown-btn-showpane">
+		  					</div>
+	  					</div>
+	  				</div>
+	  				<p class="navbar-text"></p>
+				</ul>
 				
+
+
+				<ul class="nav navbar-nav navbar-right">  
+					<li><%= link_to 'View Classes', classrooms_path %> </li>
 					<li><%= link_to "Account Settings", edit_user_registration_path %></li>
   					<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-  			<% else %>
+  	<% else %>
   				<ul class="nav navbar-nav navbar-right">  
+  					<li><%= link_to 'View Classes', classrooms_path %> </li>
   					<li><%= link_to "Log in", new_user_session_path, class: "btn" %></li>
   					<li><%= link_to "Sign up", new_user_registration_path, class: "btn" %></li>
-			<% end %>
+	<% end %>
 				</ul>  
 		  </div>
 			<!-- /.navbar-collapse -->

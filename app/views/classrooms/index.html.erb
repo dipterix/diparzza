@@ -1,0 +1,68 @@
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <div class="tile" style="min-height:500px">
+  <h1>Classrooms</h1>
+
+  <div class="float-right pointer-cursor" id="classroom-view-toggle" clicked="yes">
+    View All Classrooms
+  </div>
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Num</th>
+        <th>Name</th>
+        <th>Institution</th>
+        <th>Teacher</th>
+        <th>Last Modified</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+
+    <tbody class="align-left classrooms-list">
+      <% @classrooms.each do |classroom| %>
+        <tr <%- if classroom.user==current_user %>class="info"<% else %>class="classrooms-list-normal"<% end -%>>
+          <td><%= classroom.num %></td>
+          <td><%= classroom.name %></td>
+          <td><%= classroom.user.institution %></td>
+          <td><%= classroom.user.nickname %></td>
+          <td><%= classroom.user.updated_at %></td>
+
+          <td><%= link_to 'Details', classroom %></td>
+          <%- if classroom.user==current_user %>
+          <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
+          
+          <% else %>
+          <td></td>
+          <% end -%>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+    vbtn = $("#classroom-view-toggle");
+    $(document).ready(function(){
+      vbtn.click(function(){
+        boo = (vbtn.attr('clicked') == 'yes');
+        if(boo){
+          vbtn.text("Only My Classrooms")
+          $(".classrooms-list-normal").fadeIn();
+          vbtn.attr('clicked', 'no')
+        }else{
+          vbtn.text("View All Classrooms")
+          $(".classrooms-list-normal").fadeOut();
+          vbtn.attr('clicked', 'yes')
+        }
+      })
+    })
+  </script>

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717020227) do
+ActiveRecord::Schema.define(version: 20140717053820) do
+
+  create_table "classrooms", force: true do |t|
+    t.string   "num"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "intro"
+  end
+
+  add_index "classrooms", ["user_id"], name: "index_classrooms_on_user_id"
 
   create_table "profiles", force: true do |t|
     t.string   "nickname"

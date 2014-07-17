@@ -320,3 +320,62 @@ td{
 .inline{
 	display: inline-block;
 }
+
+.course-intro-pane{
+	width:100%;
+	min-height: 300px;
+}
+
+.dropdown-arrow-navbar{
+	left: 50%
+}
+.dropdown-menu-navbar{
+	left:10%;
+	right:10%;
+	width: 80%;
+}
+.dropdown-btn-navbar{
+	color: rgba(239, 240, 242, 0.9);
+}
+@media (min-width: 768px){
+	.dropdown-menu-navbar{
+		float:center;
+		padding: 20px 50px;
+		min-height: 300px;
+		max-height: 600px;
+
+		overflow-x:hidden;
+		overflow:auto;
+
+		text-align: center;
+		background-color: rgba(52, 73, 94, 0.9);
+
+	}
+	#dropdown-btn-showpane{
+		background-color: rgba(255, 255, 255, 0.2);
+		display: none;
+	}
+}
+@media (max-width: 767px){
+	.dropdown-btn-navbar{
+		left:5%;
+		right:5%;
+		width:90%;
+		text-align: left;
+	}
+	.dropdown-menu-navbar{
+		left: 0;
+		right: 0;
+		width:100%;
+		max-height: auto;
+		min-height: 42px;
+		padding: 20px 5px 10px 5px;
+	}
+	#dropdown-btn-showpane{
+		display: none;
+	}
+}
+
+.classrooms-list-normal{
+	display: none;
+}

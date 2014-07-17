@@ -82,38 +82,36 @@
       
       <% end %>
 
+
+
       <h1 class="page-header">Class Details</h1>
       <div class="align-left">
-        <div class="course-list-box">
-          <span class="course-list-title">
-            Machine Learning
-          </span>
-          <p>
-            University of Science and Technology of China
-            <address>By: Genevera Allen</address>
-          </p>
-          <div class="full-width" role="set-min-height">
-            <a class="btn btn-info float-right">View Details</a>
+        <% @current_user.classrooms.each do |classroom| %>
+          <div class="course-list-box">
+            <span class="course-list-title">
+              <%= classroom.num %>: <%= classroom.name %>
+            </span>
+            <p>
+              <%= classroom.user.institution %>
+              <address>By: <%= classroom.user.nickname %></address>
+            </p>
+            <div class="full-width" role="set-min-height">
+              <span class="float-right" style="font-weight:normal">
+                <%= link_to 'Edit', edit_classroom_path(classroom) %> |
+                <%= link_to 'View Details', classroom %> |
+                <%= link_to 'Dismiss', classroom, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </span>
+            </div>
           </div>
-        </div>
+          
+        <% end %>
         
-        <div class="course-list-box">
-          <span class="course-list-title">
-            Machine Learning
-          </span>
-          <p>
-            University of Science and Technology of China
-            <address>By: Genevera Allen</address>
-          </p>
-          <div class="full-width" role="set-min-height">
-            <a class="btn btn-info float-right">View Details</a>
-          </div>
-        </div>
+        <%= link_to 'Open a New Classroom', new_classroom_path, class: "btn btn-primary top-mg-10" %>
         
-        <button type="submit" class="btn btn-primary top-mg-10">Open a New Course</button>
       </div>
       
     </div>
     </div>
     <!-- /.container -->
+
 

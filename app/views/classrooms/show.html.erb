@@ -1,0 +1,40 @@
+<%= render 'layouts/navbar' %>
+<script type="text/javascript">
+$(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @classroom.name %> )")
+</script>
+<div class="container">
+	<p id="notice"><%= notice %></p>
+
+
+
+		<div class="row row-fluid clearfix">
+			<div class="col-md-2 course-sidebar-box hide-on-tablets">
+				<h6>Dash Board</h6>
+				<div class="course-sidebar">
+					<div class="full-width">
+						<label href="#fui-button" class='btn-sidebar full-width' role="active">Introduction</label>
+					</div>
+					<div class="full-width">
+						<label href="#fui-button" class='btn-sidebar full-width'>Process Schedule</label>
+					</div>
+					<div class="full-width">
+						<label href="#fui-button" class='btn-sidebar full-width'>Announcement</label>
+					</div>
+					<div class="full-width">
+						<label href="#fui-button" class='btn-sidebar full-width'>Dropbox</label>
+					</div>
+					<div class="full-width">
+						<label href="#fui-button" class='btn-sidebar full-width'>Class member</label>
+					</div>
+					<div class="full-width">
+						<label href="#fui-button" class='btn-sidebar full-width'>Forum</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="tile bg-clear col-md-10" role="main">
+				
+				<%= render "classrooms/shared/coursecontent" %>
+			</div>
+		</div>
+</div>
