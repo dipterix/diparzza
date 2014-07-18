@@ -7,11 +7,14 @@ class ClassroomsController < ApplicationController
   # GET /classrooms.json
   def index
     @classrooms = Classroom.all.order("num ASC")
+    @appliedclass = current_user.classenrolls.where(user_id: current_user.id)
   end
 
   # GET /classrooms/1
   # GET /classrooms/1.json
   def show
+    @students = Classenroll.where(classroom_id: params[:id])
+    @class_ta = Classenroll.find_by(user_id: current_user.id, ista: true, ispassed: true, classroom_id: params[:id])
   end
 
   # GET /classrooms/new
@@ -71,7 +74,7 @@ class ClassroomsController < ApplicationController
 
     def correct_user
       @classroom = current_user.classrooms.find_by(id:params[:id])
-      redirect_to classrooms_path, notice: "Not authorized to edit this pin" if @classroom.nil?
+      redirect_to classrooms_path, notice: "Not authorized to edit this Class" if @classroom.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,0 +1,30 @@
+<h1>Listing classenrolls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Classroom</th>
+      <th>Ista</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @classenrolls.each do |classenroll| %>
+      <tr>
+        <td><%= classenroll.user_id %></td>
+        <td><%= classenroll.classroom_id %></td>
+        <td><%= classenroll.ista %></td>
+        <td><%= link_to 'Show', classenroll %></td>
+        <td><%= link_to 'Edit', edit_classenroll_path(classenroll) %></td>
+        <td><%= link_to 'Destroy', classenroll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Classenroll', new_classenroll_path %>
+

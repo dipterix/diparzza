@@ -24,8 +24,16 @@
 
 
     <tbody class="align-left classrooms-list">
+
       <% @classrooms.each do |classroom| %>
-        <tr <%- if classroom.user==current_user %>class="info"<% else %>class="classrooms-list-normal"<% end -%>>
+        <% isApplied = nil %>
+        <% @appliedclass.each do |applied| %>
+          <% if applied.classroom_id ==  classroom.id %>
+            <% isApplied = applied %>
+          <% end %>
+        <% end %>
+
+        <tr <%- if classroom.user==current_user %>class="info"<% elsif isApplied %>class="warning"<% else %>class="classrooms-list-normal"<% end -%>>
           <td><%= classroom.num %></td>
           <td><%= classroom.name %></td>
           <td><%= classroom.user.institution %></td>
@@ -36,8 +44,10 @@
           <%- if classroom.user==current_user %>
           <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
           
+          <% elsif isApplied %>
+          <td><%= link_to 'Unenroll', isApplied, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% else %>
-          <td></td>
+          <td><%= link_to 'Enroll', new_classenroll_path(:classroom => classroom) %></td>
           <% end -%>
         </tr>
       <% end %>

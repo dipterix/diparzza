@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @classenroll.user_id %>
+</p>
+
+<p>
+  <strong>Classroom:</strong>
+  <%= @classenroll.classroom_id %>
+</p>
+
+<p>
+  <strong>Ista:</strong>
+  <%= @classenroll.ista %>
+</p>
+
+<%= link_to 'Edit', edit_classenroll_path(@classenroll) %> |
+<%= link_to 'Back', classenrolls_path %>

@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717053820) do
+ActiveRecord::Schema.define(version: 20140717210027) do
+
+  create_table "classenrolls", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "classroom_id"
+    t.boolean  "ista"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "ispassed"
+  end
+
+  add_index "classenrolls", ["classroom_id"], name: "index_classenrolls_on_classroom_id"
+  add_index "classenrolls", ["user_id"], name: "index_classenrolls_on_user_id"
 
   create_table "classrooms", force: true do |t|
     t.string   "num"
@@ -23,6 +35,14 @@ ActiveRecord::Schema.define(version: 20140717053820) do
   end
 
   add_index "classrooms", ["user_id"], name: "index_classrooms_on_user_id"
+
+  create_table "enrolls", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "classroom_id"
+    t.boolean  "ista"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "profiles", force: true do |t|
     t.string   "nickname"

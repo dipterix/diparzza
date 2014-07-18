@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :classenrolls
+
   resources :classrooms
 
   devise_for :users

@@ -1,0 +1,49 @@
+<%= render 'layouts/navbar' %>
+<div class="container">
+	<div class="hero-unit" role="main" >
+		<h6>Class Enroll Confirm</h6>
+		<p class="separator"><%= @classroom.num %> <%= @classroom.name %></p>
+
+		<div class="align-left" style="max-width:600px;margin:0 auto;position:relative">
+		  	<p>
+		  		Hello, <%= current_user.nickname %><br />
+		  		You are choosing <strong><%= @classroom.num %></strong>. Here is the information of this class:<br />
+		  		<ul>
+		  			<li>Full Name: &nbsp;&nbsp; <%= @classroom.num %> <%= @classroom.name %></li>
+		  			<li>Owned By: &nbsp;&nbsp;&nbsp;<%= @classroom.user.realname %>, <%= @classroom.user.institution %></li>
+
+		  		</ul>
+		  		* After submittion, we will inform the teacher. Please wait :)<br />
+		  		* By Signin to the classroom, you agree to the <strong>honor code</strong>.
+		  	</p>
+		</div>
+		<div>
+			<%= form_for(@classenroll) do |f| %>
+			  <% if @classenroll.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@classenroll.errors.count, "error") %> prohibited this classenroll from being saved:</h2>
+
+			      <ul>
+			      <% @classenroll.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+
+			  <div class="field hidden">
+			    <%= f.label :user_id %>
+			    <%= f.number_field :user_id %>
+			  </div>
+			  <div class="field hidden">
+			    <%= f.label :classroom_id %>
+			    <%= f.number_field :classroom_id, value: @classroom.id %>
+			  </div>
+
+			  <div class="actions">
+			    <%= f.submit "Confirm", class: "btn btn-info", style: "width:150px" %>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+</div>
