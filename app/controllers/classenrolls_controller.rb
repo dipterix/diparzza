@@ -52,19 +52,25 @@ class ClassenrollsController < ApplicationController
     classroom_id = update_params.delete('classroom_id')
     @class_ta = Classenroll.find_by(user_id: current_user.id, ista: true, ispassed: true, classroom_id: @classenroll.classroom.id)
     if @class_ta || @classenroll.classroom.user==current_user
+      # Teacher / TA, authorized to change status
+      respond_to do |format|
+        if @classenroll.update(update_params)
+          format.html { redirect_to classroom_path(classroom_id), 
+            notice: 'Student enrollment status was successfully updated. :)' }
+          format.json { render :show, status: :ok, location: @classenroll }
+        else
+          format.html { render :edit }
+          format.json { render json: @classenroll.errors, status: :unprocessable_entity }
+        end
+      end
     else
-      update_params.delete('ispassed')
-    end
-    respond_to do |format|
-      if @classenroll.update(update_params)
+      respond_to do |format|
         format.html { redirect_to classroom_path(classroom_id), 
-          notice: 'Classenroll was successfully updated.' }
+              notice: 'Status not changed because you are not TA nor the owner of this class :(' }
         format.json { render :show, status: :ok, location: @classenroll }
-      else
-        format.html { render :edit }
-        format.json { render json: @classenroll.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # DELETE /classenrolls/1

@@ -1,0 +1,55 @@
+<style type="text/css">
+	.compress-word{
+		max-width:25%;
+		overflow: hidden;
+	}
+	.student-list-header tr th,
+	.student-list-body tr td{
+		text-align: center;
+	}
+</style>
+
+<div class="student-list">
+	<table class="full-width table">
+	  <thead class="student-list-header">
+	    <tr>
+	      <th>User Name</th>
+	      <th>Real Name</th>
+	      <th>Email</th>
+	      <th>TA status</th>
+	      <th>Institution</th>
+	      <th>Enrolled?</th>
+	      <th>Action</th>
+	    </tr>
+	  </thead>
+	  <tbody class="student-list-body">
+	  <% istutor = (@classroom.user == current_user || @class_ta) %>
+	  	<% @students.each_with_index do |student, index| %>
+	  		<% thisuser = student.user==current_user %>
+	  	  <tr class="<% if student.ispassed %><% else %>info<% end %>">
+			<td><%= student.user.nickname %></td>
+			<% if istutor || current_user==student.user %>
+				<td><%= student.user.realname %></td>
+				<td><%= student.user.email %></td>
+			<% else %>
+				<td>*********</td>
+				<td>*********</td>
+			<% end %>
+			<td><%= student.ista %></td>
+			<td class="compress-word"><%= student.user.institution %></td>
+			<% if (istutor) && (not thisuser) %>
+				<td>asdasdasd</td>
+			<% else %>
+				<td><%= student.ispassed %></td>
+			<% end %>
+
+			<% if (istutor) || thisuser %>
+				<td><%= link_to 'Edit', edit_classenroll_path(student) %></td>
+			<% else %>
+				<td></td>
+			<% end %>
+		  </tr>
+		<% end %>
+    </tbody>
+  </table>
+</div>

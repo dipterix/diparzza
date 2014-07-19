@@ -74,7 +74,7 @@
 
         <div class="input">      
           <label class="input-q-f1">Teacher Status:</label>
-          <%= f.check_box :status, 'data-toggle' => "switch", checked: current_user.status %>
+          <%= f.check_box :status, class: "switch has-switch" ,'data-toggle' => "switch", checked: current_user.status %>
         </div>
             
         <%= f.submit "Confirm Changes", class: "btn btn-primary top-mg-10" %>

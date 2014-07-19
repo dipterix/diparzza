@@ -57,7 +57,9 @@
 .align-right{
 	text-align:right;
 }
-
+.align-center{
+	text-align: center;
+}
 .hero-unit{
 	padding:60px;
 	margin-bottom:30px;
@@ -321,9 +323,20 @@ td{
 	display: inline-block;
 }
 
-.course-intro-pane{
+.course-intro-textarea{
 	width:100%;
 	min-height: 200px;
+}
+
+.course-intro-pane{
+	margin: 0 0 0 auto;
+	width:90%;
+	min-height: 300px;
+}
+@media(max-width: 767px){
+	.course-intro-pane{
+		width:100%;
+	}
 }
 
 .dropdown-arrow-navbar{

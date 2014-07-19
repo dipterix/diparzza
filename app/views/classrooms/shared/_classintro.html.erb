@@ -1,0 +1,10 @@
+<div>
+	<h6 class="align-right"> <i><%= @classroom.num %>  <%= @classroom.name %></i></h6>
+	<div class="separator align-center">Introduction</div>
+	<div id="course-intro-pane" class="course-intro-pane"><%= @classroom.intro %></div>
+	<script type="text/javascript">
+		var s = '<p>'+$("#course-intro-pane").text().replace(/\n/g,'<br />') + '</p>'
+		s = s.replace('\r', '</p><p>')
+		$("#course-intro-pane").html(s)
+	</script>
+</div>

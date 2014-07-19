@@ -1,13 +1,102 @@
 <%= render 'layouts/navbar' %>
+<% num = @classenroll.classroom.num %>
+<% student = @classenroll.user %>
+<style type="text/css">
+	#class-enroll-edit-list,
+	#class-enroll-edit-list div{
+		background-color: rgb(248,248,248);
+	}
+</style>
+
 <div class="container">
 	<div class="hero-unit" role="main" >
 		<h6>Edit Enrollment</h6>
-		<p class="separator"><%= @classenroll.classroom.num %> <%= @classenroll.user.realname %></p>
+		<p class="separator">
+			<%= num %> <%= student.realname %>
+		</p>
+		<div class="align-left" style="max-width:800px;margin:0 auto;position:relative">
+		  	<p>
+		  		Hello, <%= current_user.nickname %><br />
+		  		You are changing 
+		  		<% if student==current_user %>
+		  			your
+		  		<% else %>
+		  			<strong><%= student.realname %>'s</strong>
+		  		<%end%>  status in 
+				<strong><%= num %></strong>. Here is the information:<br />
+			</p>
+			<div id="class-enroll-edit-list" class="row">
 
+						<div class="col-md-5">Nick Name:</div>
+						<div class="col-md-7"><%= student.nickname %></div>
 
-<%= render 'form' %>
+						<div class="col-md-5">Full Name:</div>
+						<div class="col-md-7"><%= student.realname %></div>
 
-<%= link_to 'Show', @classenroll %> |
-<%= link_to 'Back', classenrolls_path %>
+			  			<div class="col-md-5">Email:</div>
+			  			<div class="col-md-7"><%= student.email %></div>
+
+		  				<div class="col-md-5">Institution: </div>
+		  				<div class="col-md-7"><%= student.institution %></div>
+
+		  				<div class="col-md-5">TA status:</div>
+		  				<div class="col-md-7 pointer-cursor" id="enroll-edit-list-ta" val=<%= @classenroll.ista %> target="form-ista"><%= @classenroll.ista %> <i>(Click to change)</i></div>
+
+		  				<div class="col-md-5">Enrolled in class:</div>
+		  				<div class="col-md-7 pointer-cursor" id="enroll-edit-list-passed" val=<%= @classenroll.ispassed %>  target="form-ispassed" ><%= @classenroll.ispassed %> <i>(Click to change)</i></div>
+
+		  	</div>
+
+		  	<p>
+		  		* You must be the teacher/assistant of this class to change the status, or the changes will be unsaved.
+		  	</p>
+		</div>
+<script type="text/javascript">
+	var tftoggle = function(){
+		val = $(this).attr('val')=='true'
+		target = $(this).attr('target')
+		$(this).html((!val) + '<i>(Click to change)</i>')
+		$(this).attr('val', !val);
+		$(this).css('color','red')
+		$("#"+target).prop('checked', !val)
+	}
+	$("#enroll-edit-list-ta").click(tftoggle)
+	$("#enroll-edit-list-passed").click(tftoggle)
+</script>
+
+<%= form_for(@classenroll) do |f| %>
+  <% if @classenroll.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@classenroll.errors.count, "error") %> prohibited this classenroll from being saved:</h2>
+
+      <ul>
+      <% @classenroll.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field hidden">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field hidden">
+    <%= f.label :classroom_id %>
+    <%= f.number_field :classroom_id %>
+  </div>
+  <div class="field hidden">
+    <%= f.label :ista %>
+    <%= f.check_box :ista, id: "form-ista" %>
+  </div>
+  <div class="field hidden">
+      <%= f.label :ispassed %>
+      <%= f.check_box :ispassed, id: "form-ispassed" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Confirm changes", class: "btn btn-warning" %> <%= link_to 'Back', classroom_path(@classenroll.classroom_id) %>
+  </div>
+<% end %>
+
 	</div>
 </div>

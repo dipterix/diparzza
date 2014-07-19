@@ -1,54 +1,20 @@
 <!--Using ajax to get tabs-->
-<div class="hidden"><%= @classroom.intro %></div>
 
-<style type="text/css">
-	.compress-word{
-		max-width:25%;
-		overflow: hidden;
-	}
-	.student-list-header tr th,
-	.student-list-body tr td{
-		text-align: center;
-	}
-</style>
 
-<div class="student-list">
-	<table class="full-width table">
-	  <thead class="student-list-header">
-	    <tr>
-	      <th>User Name</th>
-	      <th>Real Name</th>
-	      <th>Email</th>
-	      <th>TA status</th>
-	      <th>Institution</th>
-	      <th>Enrolled?</th>
-	      <th>Action</th>
-	    </tr>
-	  </thead>
-	  <tbody class="student-list-body">
-	  <% istutor = (@classroom.user == current_user || @class_ta) %>
-	  	<% @students.each_with_index do |student, index| %>
-	  		<% thisuser = student.user==current_user %>
-	  	  <tr class="<% if student.ispassed %><% else %>info<% end %>">
-			<td><%= student.user.nickname %></td>
-			<td><%= student.user.realname %></td>
-			<td><%= student.user.email %></td>
-			<td><%= student.ista %></td>
-			<td class="compress-word"><%= student.user.institution %></td>
-			<% if (istutor) && (not thisuser) %>
-				<td>asdasdasd</td>
-			<% else %>
-				<td><%= student.ispassed %></td>
-			<% end %>
 
-			<% if (istutor) || thisuser %>
-				<td><%= link_to 'Edit', edit_classenroll_path(student) %></td>
-			<% else %>
-				<td></td>
-			<% end %>
-		  </tr>
-		<% end %>
-    </tbody>
-  </table>
-</div>
+<%= render 'classrooms/shared/classintro' %>
 
+= render 'classrooms/shared/stunamelist' %>
+
+<%= link_to 'ajax show', classroom_path, :remote => true, :method => 'GET', "data-type" => :json, :id => "update_foobar" %>
+	<div id="foobar"></div>
+	<script type="text/javascript">
+	$(function() {
+		$('#update_foobar').bind("ajax:success", function(event, data, status, x) {
+		    var foobar = $('#foobar');
+	        alert(status);
+	        alert(data.num)
+	        foobar.html( status );
+	    });
+	});
+	</script>
