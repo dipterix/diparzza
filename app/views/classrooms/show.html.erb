@@ -12,34 +12,50 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 				<h6>Dash Board</h6>
 				<div class="course-sidebar">
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width' role="active" target="intro">Introduction</label>
+						<label href="#fui-button" class='btn-sidebar full-width' target="intro" role="active">
+							Introduction
+						</label>
 					</div>
 
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width'>Process Schedule</label>
+						<label href="#fui-button" class='btn-sidebar full-width' target="process">Process Schedule</label>
 					</div>
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width'>Announcement</label>
+						<label href="#fui-button" class='btn-sidebar full-width' target="announce">Announcement</label>
 					</div>
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width'>Dropbox</label>
+						<label href="#fui-button" class='btn-sidebar full-width' target="storage">Dropbox</label>
 					</div>
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width'>Class member</label>
+						<label href="#fui-button" class='btn-sidebar full-width' target="member">Class member</label>
 					</div>
 					<div class="full-width">
-						<label href="#fui-button" class='btn-sidebar full-width'>Forum</label>
+						<label href="#fui-button" class='btn-sidebar full-width' target="forum">Forum</label>
 					</div>
 				</div>
 			</div>
 			
 			<div class="tile bg-clear col-md-10" role="main">
-				<div class="course-main-pane">
+				<div class="course-main-pane" id="course-main-pane">
 					<%= render "classrooms/shared/coursecontent" %>
 				</div>
 			</div>
 		</div>
 </div>
+
+
+<%= link_to 'ajax show', classroom_path(target: 'undefined'), :remote => true, :method => 'GET', "data-type" => :json, :id => "update_foobar" %>
+
+	<script type="text/javascript">
+	$(function() {
+		$('#update_foobar').bind("ajax:success", function(event, data, status, x) {
+		    var foobar = $('#course-main-pane');
+	        foobar.html( data.to_s );
+	        $(".course-main-pane").fadeTo(500, 1)
+	    });
+	});
+	</script>
+
 
 
 
@@ -48,10 +64,13 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 		target = $(this).attr('target');
 		isActiveBtn = $(this).attr('role')=="active";
 		if(!isActiveBtn){
+			$("#update_foobar").attr('href', '<%= classroom_path %>?target='+target);
 			$("label.btn-sidebar[role='active']").attr('role','inactive');
 			$(this).attr('role', "active");
-			$(".course-main-pane").fadeTo(200, 0.3)
-			$(".course-main-pane").fadeTo(200, 1)
+			$(".course-main-pane").fadeTo(500, 0.3, function(){
+				$("#update_foobar").click();
+			})
+			
 		}
 	})
 </script>

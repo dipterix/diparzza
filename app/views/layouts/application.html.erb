@@ -70,13 +70,13 @@ $(document).ready(function(){
     showpane = $("#dropdown-btn-showpane");
     showpane.stop(stopAll=true,goToEnd=true);
     showpane.hide();
-    showpane.text($(id).text());
+    showpane.html($(id).text().replace(/\n/g,'<br />'));
 
     
     if(parseInt(showpane.css("height"))<260){
       showpane.css('min-height' , '260px');
     }
-    showpane.show();
+    showpane.fadeIn();
 
   }
   );

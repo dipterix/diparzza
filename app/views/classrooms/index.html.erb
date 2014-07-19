@@ -1,13 +1,14 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-  <div class="tile" style="min-height:500px">
+  
+  <div class="tile" style="min-height:500px;background-color:rgba(248,248,248,0.5)">
   <h1>Classrooms</h1>
 
   <div class="float-right pointer-cursor" id="classroom-view-toggle" clicked="yes">
     View All Classrooms
   </div>
-
+  
 
 
   <table class="table">
@@ -24,23 +25,46 @@
 
 
     <tbody class="align-left classrooms-list">
-
+      <% count = [0,0,0,0] %>
       <% @classrooms.each do |classroom| %>
         <% isApplied = nil %>
         <% @appliedclass.each do |applied| %>
           <% if applied.classroom_id ==  classroom.id %>
             <% isApplied = applied %>
+            <% break %>
           <% end %>
         <% end %>
 
-        <tr <%- if classroom.user==current_user %>class="info"<% elsif isApplied %>class="warning"<% else %>class="classrooms-list-normal"<% end -%>>
+        <% isTeacher = classroom.user==current_user %>
+        <% isPassed = (not isApplied.nil?) && isApplied.ispassed %>
+
+        <%- if isTeacher %>
+          <% count[0]+=1 %>
+          <tr class="info tinfo">
+        <% elsif isPassed %>
+          <% count[1]+=1 %>
+          <tr class="success tsuccess">
+        <% elsif not isApplied.nil? %>
+          <% count[2]+=1 %>
+          <tr class="warning twarning">
+        <% else %>
+          <% count[3]+=1 %>
+          <tr class="classrooms-list-normal">
+        <% end -%>
           <td><%= classroom.num %></td>
           <td><%= classroom.name %></td>
           <td><%= classroom.user.institution %></td>
           <td><%= classroom.user.nickname %></td>
           <td><%= classroom.user.updated_at %></td>
 
-          <td><%= link_to 'Details', classroom %></td>
+          <% if isPassed %>
+            <td><%= link_to 'Details', classroom %></td>
+          <% elsif classroom.user==current_user %>
+            <td><%= link_to 'Enter', classroom %></td>
+          <% else %>
+            <td><%= link_to 'View', classroom %></td>
+          <% end %>
+
           <%- if classroom.user==current_user %>
           <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
           
@@ -56,6 +80,23 @@
 
   <br>
 
+  <div >
+      <% sum=count[0]+count[3]+count[2] %>
+      <ul class="align-left list-bar">
+        <li>
+          <div class="list-bar-left-f3 inline-block">Your class:</div><div class="tinfo inline-block list-bar-bar" style="width: <%= 70*count[0]/sum %>%">&nbsp;</div> Number: <%= count[0] %>
+        </li>
+        <li>
+          <div class="list-bar-left-f3 inline-block">Enrolled: </div><div class="tsuccess inline-block list-bar-bar" style="width: <%= 70*count[1]/sum %>%">&nbsp;</div> Number: <%= count[1] %>
+        </li>
+        <li>
+          <div class="list-bar-left-f3 inline-block">Pending approval: </div><div class="twarning inline-block list-bar-bar" style="width: <%= 70*count[2]/sum %>%">&nbsp;</div> Number: <%= count[2] %>
+        </li>
+        <li>
+          <div class="list-bar-left-f3 inline-block">Not applied:</div><div class="classrooms-list-normal inline-block list-bar-bar" style="width: 70/3 %>%">&nbsp;</div> Number: <%= count[3] %>
+        </li>
+      </ul>
+  </div>
   </div>
 </div>
 

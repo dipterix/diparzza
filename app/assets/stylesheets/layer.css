@@ -60,6 +60,22 @@
 .align-center{
 	text-align: center;
 }
+.inline-block{
+	display: inline-block;
+}
+
+.tinfo{
+	background-color: #d9edf7
+}
+.twarning{
+	background-color: #fcf8e3
+}
+.tsuccess{
+	background-color: #dff0d8
+}
+
+
+
 .hero-unit{
 	padding:60px;
 	margin-bottom:30px;
@@ -393,4 +409,14 @@ td{
 
 .classrooms-list-normal{
 	display: none;
+}
+
+.list-bar li{
+	margin:5px 0;
+}
+.list-bar-left-f3{
+	width: 25%;
+}
+.list-bar-bar{
+	min-width: 85px;
 }

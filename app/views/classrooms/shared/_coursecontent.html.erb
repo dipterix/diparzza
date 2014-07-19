@@ -6,15 +6,3 @@
 
 = render 'classrooms/shared/stunamelist' %>
 
-<%= link_to 'ajax show', classroom_path, :remote => true, :method => 'GET', "data-type" => :json, :id => "update_foobar" %>
-	<div id="foobar"></div>
-	<script type="text/javascript">
-	$(function() {
-		$('#update_foobar').bind("ajax:success", function(event, data, status, x) {
-		    var foobar = $('#foobar');
-	        alert(status);
-	        alert(data.num)
-	        foobar.html( status );
-	    });
-	});
-	</script>
