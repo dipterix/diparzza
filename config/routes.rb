@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :classannounces
+
   resources :classenrolls
 
   resources :classrooms
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'pages#home'
   get 'course' => 'pages#course'
+  get 'blank' => 'public#blank'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

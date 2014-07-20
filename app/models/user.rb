@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :classrooms
   has_many :classenrolls
+  has_many :classannounces
 end

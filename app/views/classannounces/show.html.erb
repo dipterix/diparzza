@@ -1,0 +1,10 @@
+<div class="tile bg-grey" role="main">
+	<h6 class="separator">Announced!</h6>
+	<p>
+		Soon all the people in this room will see it.
+	</p>
+	<div class="align-left">
+		<%= @classannounce.classroom.num %>: <%= @classannounce.user.nickname %> @<%= @classannounce.created_at %> announced:
+		<pre style="padding-left:15px"><%= @classannounce.content %></pre>
+	</div>
+</div>

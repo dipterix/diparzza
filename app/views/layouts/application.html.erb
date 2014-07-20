@@ -26,9 +26,10 @@
 
 <div class="notification-pane">
   <% flash.each do |name, msg| %>
-    <%= content_tag(:div, msg, class: "alert alert-info") %>
+    <div class="alert alert-info alert-sys", data-dismiss="alert"><%= msg %> <i>(Click to dismiss)</i>
+    </div>
   <% end %>
-
+  
 </div>
 
 <%= yield %>
@@ -78,7 +79,7 @@ $(document).ready(function(){
     }
     showpane.fadeIn();
 
-  }
+  },function(){}
   );
 })
 </script>

@@ -343,17 +343,25 @@ td{
 	width:100%;
 	min-height: 200px;
 }
-
 .course-intro-pane{
 	margin: 0 0 0 auto;
 	width:90%;
 	min-height: 300px;
 }
+.course-default-textarea{
+	margin: 0 auto;
+	width:90%;
+	min-height: 250px;
+}
 @media(max-width: 767px){
 	.course-intro-pane{
 		width:100%;
 	}
+	.course-default-textarea{
+		width:100%;
+	}
 }
+
 
 .dropdown-arrow-navbar{
 	left: 50%

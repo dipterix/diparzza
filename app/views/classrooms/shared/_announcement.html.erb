@@ -1,0 +1,58 @@
+<div>
+	<div id="course-announce-pane">
+		<div class="align-right" style="margin-bottom:10px ">
+			<button class="btn btn-default" id="course-announce-new" isShow= false>
+				New Announcement 
+			</button>
+			
+			<div id='course-announce-new-pane'>
+			  
+			</div>
+		</div>
+		<div class="panel-group" id="accordion">
+			<% @classroom.classannounces.order("created_at DESC").each_with_index do |accounce,index| %>
+			  	<div class="panel panel-default">
+			    	<div class="panel-heading">
+			      		<a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= index %>">
+			      			<h4 class="panel-title">
+			        		
+			          			By: <%= accounce.user.nickname %> <i>(<%= accounce.created_at %>)</i>
+			        		
+			      			</h4>
+			      		</a>
+			    	</div>
+			    	<div id="collapse-<%= index %>" class="panel-collapse collapse <% if index==0 %>in<% end %>">
+			      		<pre class="panel-body" style="margin:0"><%= accounce.content %></pre>
+			    	</div>
+			 	</div>
+		 	<% end %>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$("#course-announce-new").click(function(){
+		btn = $("#course-announce-new");
+		isShow = $(this).prop('isShow');
+		target = $("#course-announce-new-pane");
+		if(isShow){
+			target.fadeOut(800, function(){
+				btn.text('New Announcement ')
+				target.html("")
+				target.fadeIn();
+			})
+		}else{
+			target.fadeTo(050, 0.05, function(){
+				btn.text("-Hide new -")
+				target.html(
+				'<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src=<%= new_classannounce_path(:classroom => @classroom.id) %>></iframe></div>'
+				)
+				target.fadeTo(1500, 1);
+			})
+			
+		}
+		$(this).prop('isShow', !isShow)
+	})
+
+</script>

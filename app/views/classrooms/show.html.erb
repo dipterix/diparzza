@@ -43,9 +43,7 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 		</div>
 </div>
 
-
-<%= link_to 'ajax show', classroom_path(target: 'undefined'), :remote => true, :method => 'GET', "data-type" => :json, :id => "update_foobar" %>
-
+<%= link_to 'ajax show', classroom_path(target: 'undefined'), :remote => true, :method => 'GET', "data-type" => :json, :id => "update_foobar", class: "hidden" %>
 	<script type="text/javascript">
 	$(function() {
 		$('#update_foobar').bind("ajax:success", function(event, data, status, x) {
@@ -60,6 +58,16 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 
 
 <script type="text/javascript">
+	var getMainPaneContent = function(target){
+		if(typeof(Storage)!=="undefined"){
+			// user session storage
+			
+		}
+		else{
+			
+		}
+		$("#update_foobar").click();
+  	}
 	$("label.btn-sidebar").click(function(){
 		target = $(this).attr('target');
 		isActiveBtn = $(this).attr('role')=="active";
@@ -68,9 +76,8 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 			$("label.btn-sidebar[role='active']").attr('role','inactive');
 			$(this).attr('role', "active");
 			$(".course-main-pane").fadeTo(500, 0.3, function(){
-				$("#update_foobar").click();
+				getMainPaneContent(target);
 			})
-			
 		}
 	})
 </script>

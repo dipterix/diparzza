@@ -31,6 +31,9 @@
 			<% if istutor || current_user==student.user %>
 				<td><%= student.user.realname %></td>
 				<td><%= student.user.email %></td>
+			<% elsif student.ista %>
+				<td>*********</td>
+				<td><%= student.user.email %></td>
 			<% else %>
 				<td>*********</td>
 				<td>*********</td>
