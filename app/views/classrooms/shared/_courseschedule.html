@@ -1,0 +1,55 @@
+﻿<table class="table edit-table" data-target="" id="course-schedule">
+	<thead>
+		<tr>
+			<th>
+				Week
+			</th>
+			<th>
+				Day
+			</th>
+			<th>
+				Class
+			</th>
+			<th>
+				Homework
+			</th>
+			<th>
+				Reading
+			</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="otherline">
+			<td>
+				1
+			</td>
+			<td>
+				Aug 25
+			</td>
+			<td>
+				Overview and Sequencing the Genome
+			</td>
+			<td>
+				p24[1,2,3,4(6)], p26[1]
+			</td>
+			<td>
+				p24[5,6,7], p26 <a href="http://baidu.com">MiniLab</a>
+			</td>
+
+		</tr>
+			
+	</tbody>
+</table>
+
+
+<% if current_user == @classroom.user %>
+
+<div class="align-right">
+	<div class="edit-confirm">
+		<button class="btn btn-success">Confirm changes</button> | <a href="#fakelink">Regardless of Changes</a>
+	</div>
+	<a class="btn btn-info edit-start">Edit Form</a>
+	<script>init_edit_table('edit-table')</script>
+</div>
+<% end %>

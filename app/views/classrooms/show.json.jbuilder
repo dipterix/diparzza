@@ -10,6 +10,10 @@ unless @classroom.user!=current_user && Classenroll.find_by(user_id: current_use
 		html = render 'classrooms/shared/stunamelist'
 	elsif params[:target]=='announce'
 		html = render 'classrooms/shared/announcement'
+	elsif params[:target]=='forum'
+		html = render 'classrooms/shared/forum'
+	elsif params[:target]=='process'
+		html = render 'classrooms/shared/courseschedule'
 	else
 		html = '<h6 class="align-center">This page is Under Construction</h6>'
 	end

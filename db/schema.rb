@@ -47,39 +47,6 @@ ActiveRecord::Schema.define(version: 20140720012803) do
 
   add_index "classrooms", ["user_id"], name: "index_classrooms_on_user_id"
 
-  create_table "enrolls", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "classroom_id"
-    t.boolean  "ista"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "profiles", force: true do |t|
-    t.string   "nickname"
-    t.string   "realname"
-    t.string   "school"
-    t.string   "dept"
-    t.boolean  "is_teacher"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
-
-  create_table "user_profiles", force: true do |t|
-    t.string   "name"
-    t.string   "school"
-    t.string   "department"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id"
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

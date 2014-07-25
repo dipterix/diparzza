@@ -1,0 +1,56 @@
+.edit-table{
+margin-bottom: 0;
+}
+
+.edit-table-input{
+	background-color: transparent;
+	
+}
+.edit-table-input:hover{
+	background-color: rgba(223, 240, 216, 0.5);
+}
+
+#edit-new{
+	position: relative;
+	margin-bottom: 40px;
+	height: 30px;
+	cursor:pointer;
+	text-align: center;
+	color: transparent;
+	padding-top: 10px;
+	margin-bottom: 40px;
+	width: 100%;
+}
+#edit-new:after{
+	position: absolute;
+	content: "";
+	bottom: 10px;
+	left: 50%;
+	margin-left: -5px;
+	margin-bottom: 0;
+	height: 10px;
+	width: 10px;
+	border-bottom: solid 2px #ccc;
+	border-left: solid 2px #ccc;
+	-moz-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	cursor:pointer
+}
+tr.otherline{
+	background-color: #dff0d8;
+}
+.edit-start,
+.edit-confirm{
+	display: none
+}
+.minus{
+	background-color: #ededed;
+	color: rgba(52, 75, 94, 0.3);
+	border: 0px solid transparent;
+}
+.minus:hover{
+	color: rgba(52, 75, 94, 1);
+	cursor: pointer;
+}
+

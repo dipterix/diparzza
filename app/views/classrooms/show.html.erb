@@ -72,11 +72,17 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 		target = $(this).attr('target');
 		isActiveBtn = $(this).attr('role')=="active";
 		if(!isActiveBtn){
-			$("#update_foobar").attr('href', '<%= classroom_path %>?target='+target);
+			url = '<%= classroom_path %>?target='+target
+			$("#update_foobar").attr('href', url);
 			$("label.btn-sidebar[role='active']").attr('role','inactive');
 			$(this).attr('role', "active");
 			$(".course-main-pane").fadeTo(500, 0.3, function(){
-				getMainPaneContent(target);
+				//getMainPaneContent(target);
+				$.getJSON(url, {},function(data, status){
+					var foobar = $('#course-main-pane');
+			        foobar.html( data.to_s );
+			        $(".course-main-pane").fadeTo(500, 1)
+				})
 			})
 		}
 	})

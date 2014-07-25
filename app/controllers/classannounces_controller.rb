@@ -31,7 +31,7 @@ class ClassannouncesController < ApplicationController
 
     respond_to do |format|
       if @classannounce.save
-        format.html { redirect_to @classannounce, notice: 'Classannounce was successfully created.' }
+        format.html { redirect_to @classannounce }
         format.json { render :show, status: :created, location: @classannounce }
       else
         format.html { render :new }
