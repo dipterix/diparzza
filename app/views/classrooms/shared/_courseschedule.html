@@ -1,55 +1,65 @@
-﻿<table class="table edit-table" data-target="" id="course-schedule">
-	<thead>
-		<tr>
-			<th>
-				Week
-			</th>
-			<th>
-				Day
-			</th>
-			<th>
-				Class
-			</th>
-			<th>
-				Homework
-			</th>
-			<th>
-				Reading
-			</th>
-			
-		</tr>
-	</thead>
-	<tbody>
-		<tr class="otherline">
-			<td>
-				1
-			</td>
-			<td>
-				Aug 25
-			</td>
-			<td>
-				Overview and Sequencing the Genome
-			</td>
-			<td>
-				p24[1,2,3,4(6)], p26[1]
-			</td>
-			<td>
-				p24[5,6,7], p26 <a href="http://baidu.com">MiniLab</a>
-			</td>
-
-		</tr>
-			
-	</tbody>
+﻿<% if @classroom.schedule.nil? %>
+<table class="table edit-table" data-target="" id="course-schedule">
+<thead><tr>
+	<th>Week</th>
+	<th>Day</th>
+	<th>Class</th>
+	<th>Homework</th>
+	<th>Reading</th>
+</tr></thead><tbody>
+<tr class="otherline">
+	<td>1</td><td>Aug 25</td><td>Overview and Sequencing the Genome</td><td>p24[1,2,3,4(6)], p26[1]</td><td>p24[5,6,7], p26 <a href="http://baidu.com">MiniLab</a></td></tr></tbody>
 </table>
+	<% else %>
+<table class="table edit-table" data-target="" id="course-schedule">
+</table>
+<script type="text/javascript">
+$("#course-schedule").html("<%= @classroom.schedule %>")
+s = $("#course-schedule").text()
+$("#course-schedule").html(s)
+$(".edit-table tbody tr td:not(:last), .edit-table thead tr th:not(:last)").removeAttr('style')
+$(".minus").hide()
+</script>
+	<% end %>
+
 
 
 <% if current_user == @classroom.user %>
 
 <div class="align-right">
-	<div class="edit-confirm">
-		<button class="btn btn-success">Confirm changes</button> | <a href="#fakelink">Regardless of Changes</a>
-	</div>
-	<a class="btn btn-info edit-start">Edit Form</a>
-	<script>init_edit_table('edit-table')</script>
+	<%= form_for(@classroom) do |f| %>
+	  	<% if @classroom.errors.any? %>
+	    	<div id="error_explanation">
+	      		<h2><%= pluralize(@classroom.errors.count, "error") %> prohibited this classroom from being saved:</h2>
+
+	      		<ul>
+	      		<% @classroom.errors.full_messages.each do |message| %>
+	        		<li><%= message %></li>
+	      		<% end %>
+	      		</ul>
+	    	</div>
+	  	<% end %>
+	
+		<div class="form-group hidden">
+		    <%= f.text_field :schedule, class: "course-schedule-text-field" %>
+		    <%= f.submit "Confirm Changes", class: "btn btn-primary submit-btn" %>
+		</div>
+		<div class="edit-confirm">
+			<a class="btn btn-primary" id = "confirm-changes" >Confirm Changes</a> | <a href="#fakelink">Preview</a><br /><i>If you want to cancel edit, just leave the tab.</i>
+		</div>
+		<a class="btn btn-info edit-start">Edit Form</a>
+	
+	<% end %>
+
 </div>
+<script>
+	init_edit_table('edit-table')
+	$("#confirm-changes").click(function(){
+		$(".edit-start").removeClass("btn-info").attr('disabled', true).before("<h6>Saving... Please Don't Leave...</h6>")
+		setTimeout(function(){
+			$(".course-schedule-text-field").val($("#course-schedule").html())
+			$(".submit-btn").click()
+		},3000)
+	})
+</script>
 <% end %>

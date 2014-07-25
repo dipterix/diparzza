@@ -81,7 +81,7 @@
   <br>
 
   <div >
-      <% sum=count[0]+count[3]+count[2] %>
+      <% sum=count[0]+count[1]+count[2]+0.1 %>
       <ul class="align-left list-bar">
         <li>
           <div class="list-bar-left-f3 inline-block">Your class:</div><div class="tinfo inline-block list-bar-bar" style="width: <%= 70*count[0]/sum %>%">&nbsp;</div> Number: <%= count[0] %>
@@ -93,7 +93,7 @@
           <div class="list-bar-left-f3 inline-block">Pending approval: </div><div class="twarning inline-block list-bar-bar" style="width: <%= 70*count[2]/sum %>%">&nbsp;</div> Number: <%= count[2] %>
         </li>
         <li>
-          <div class="list-bar-left-f3 inline-block">Not applied:</div><div class="classrooms-list-normal inline-block list-bar-bar" style="width: 70/3 %>%">&nbsp;</div> Number: <%= count[3] %>
+          <div class="list-bar-left-f3 inline-block">Not applied:</div> Number: <%= count[3] %>
         </li>
       </ul>
   </div>
@@ -116,4 +116,7 @@
         }
       })
     })
+    if (<%= sum %> < 1){
+      $("#classroom-view-toggle").click()
+    }
   </script>

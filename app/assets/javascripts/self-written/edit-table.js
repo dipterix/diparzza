@@ -94,13 +94,13 @@ init_edit_table = function(tableclass){
 			thead.children('tr').append("<th class='minus'></th>")
 			tbody.children('tr').append("<td class='minus'><span class='glyphicon glyphicon-minus delRow'></span></td>")
 			// delete row register_delete_btn
-			register_delete_btn()
+			
 			// arrange color & style
 			change_table_color()
 		}else{
 			$('.minus').show()
 		}
-		
+		register_delete_btn()
 	}
 	
 	var deactivate_edit_table = function(){
@@ -116,6 +116,7 @@ init_edit_table = function(tableclass){
 		container.animate({
 			opacity: '0.1'
 		},function(){
+			$(".minus").hide()
 			$(this).each(function(){
 				text = $(this).children('.edit-table-input').val()
 				$(this).html('')
@@ -126,6 +127,7 @@ init_edit_table = function(tableclass){
 			height: "-=17px",
 			opacity: '1'
 		})
+		$(".edit-table tbody tr td:not(:last), .edit-table thead tr th:not(:last)").removeAttr('style')
 		tbody.children('tr').children('th').remove('.minus')
 		
 		thead.children('tr').children('td').remove('.minus')
@@ -135,6 +137,7 @@ init_edit_table = function(tableclass){
 
 	end_edit = function(){
 		$(".edit-confirm").off('click', end_edit)
+		
 		deactivate_edit_table()
 		$(".edit-confirm").fadeOut(500,function(){
 			$('.edit-start').fadeIn(500)

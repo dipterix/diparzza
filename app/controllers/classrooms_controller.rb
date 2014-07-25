@@ -79,6 +79,6 @@ class ClassroomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classroom_params
-      params.require(:classroom).permit(:num, :name, :intro)
+      params.require(:classroom).permit(:num, :name, :intro, :schedule)
     end
 end

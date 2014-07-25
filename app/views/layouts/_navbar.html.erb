@@ -30,6 +30,16 @@
 										<%= classroom.intro %>
 									</div>
 		 <% end %>
+		 <% Classenroll.where(user_id: current_user.id, ispassed: true).each_with_index do |classenroll, index| %>
+							<% classroom = classenroll.classroom %>
+			  						<a class="btn dropdown-btn-navbar" href= "/classrooms/<%= classroom.id %>" target="nav-showpane-<%= index %>s">
+			  							<%= classroom.num %>: <%= classroom.name %>
+			  						</a>
+		  							<div class="hidden" id="nav-showpane-<%= index %>s">
+										<%= classroom.intro %>
+									</div>
+		 <% end %>
+
 		  					</div>
 		  					<div class="col-md-9" id="dropdown-btn-showpane">
 		  					</div>

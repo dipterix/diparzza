@@ -53,4 +53,7 @@ tr.otherline{
 	color: rgba(52, 75, 94, 1);
 	cursor: pointer;
 }
-
+.edit-table tbody tr td,
+.edit-table thead tr th{
+	min-height: 42px;
+}
