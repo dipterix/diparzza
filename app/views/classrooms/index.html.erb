@@ -57,7 +57,9 @@
           <td><%= classroom.user.nickname %></td>
           <td><%= classroom.user.updated_at %></td>
 
-          <% if isPassed %>
+          <% if current_user.nil? %>
+            <td></td>
+          <% elsif isPassed %>
             <td><%= link_to 'Details', classroom %></td>
           <% elsif classroom.user==current_user %>
             <td><%= link_to 'Enter', classroom %></td>
@@ -65,9 +67,10 @@
             <td><%= link_to 'View', classroom %></td>
           <% end %>
 
-          <%- if classroom.user==current_user %>
+          <% if current_user.nil? %>
+            <td><%= link_to 'Enroll', new_user_session_path %></td>
+          <% elsif classroom.user==current_user %>
           <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
-          
           <% elsif isApplied %>
           <td><%= link_to 'Unenroll', isApplied, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% else %>
@@ -115,8 +118,10 @@
           vbtn.attr('clicked', 'yes')
         }
       })
+
+      if (<%= @appliedclass.length() %>< 1){
+        vbtn.click()
+      }
     })
-    if (<%= sum %> < 1){
-      $("#classroom-view-toggle").click()
-    }
+    
   </script>

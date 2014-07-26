@@ -61,5 +61,10 @@ $(".minus").hide()
 			$(".submit-btn").click()
 		},3000)
 	})
+
+	$(".edit-confirm, .edit-start").click(function(){
+		$(".course-sidebar-box").fadeToggle();
+		$(".course-main-parent").toggleClass("col-md-10").toggleClass("full-width");
+	})
 </script>
 <% end %>

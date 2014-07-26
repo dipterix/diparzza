@@ -7,7 +7,11 @@ class ClassroomsController < ApplicationController
   # GET /classrooms.json
   def index
     @classrooms = Classroom.all.order("num ASC")
-    @appliedclass = current_user.classenrolls.where(user_id: current_user.id)
+    if not current_user.nil?
+      @appliedclass = current_user.classenrolls.where(user_id: current_user.id)
+    else
+      @appliedclass = []
+    end
   end
 
   # GET /classrooms/1

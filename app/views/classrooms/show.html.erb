@@ -31,7 +31,7 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 				</div>
 			</div>
 			
-			<div class="tile bg-clear col-md-10" role="main">
+			<div class="tile bg-clear col-md-10 course-main-parent" role="main">
 				<div class="course-main-pane" id="course-main-pane">
 					<%= render "classrooms/shared/coursecontent" %>
 				</div>
@@ -53,6 +53,7 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 
 
 
+
 <script type="text/javascript">
 	var getMainPaneContent = function(target){
 		if(typeof(Storage)!=="undefined"){
@@ -66,6 +67,8 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
   	}
 	$("label.btn-sidebar").click(function(){
 		target = $(this).attr('target');
+		sessionStorage.classroomTarget = target
+		sessionStorage.classroom = <%= @classroom.id %>
 		isActiveBtn = $(this).attr('role')=="active";
 		if(!isActiveBtn){
 			url = '<%= classroom_path %>?target='+target
@@ -82,4 +85,11 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 			})
 		}
 	})
+</script>
+
+<script type="text/javascript">
+	target = sessionStorage.classroomTarget
+	if(target != undefined && sessionStorage.classroom == <%= @classroom.id %>){
+		$("label.btn-sidebar[target='"+ target +"']").click()
+	}
 </script>
