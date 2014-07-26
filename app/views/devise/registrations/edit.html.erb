@@ -93,7 +93,10 @@
             </span>
             <p>
               <%= classroom.user.institution %>
-              <address>By: <%= classroom.user.nickname %></address>
+              <address>
+                By: <%= classroom.user.nickname %><br />
+                Enroll Condition: Email sites contains: <i> <%= classroom.condition %></i>
+              </address>
             </p>
             <div class="full-width" role="set-min-height">
               <span class="float-right" style="font-weight:normal">

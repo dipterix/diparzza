@@ -85,7 +85,6 @@ init_edit_table = function(tableclass){
 					'min-width': '90px'
 				})
 				$(this).css({
-					'width': w+"px",
 					'min-width': '100px'
 				})
 			})

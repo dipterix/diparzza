@@ -63,8 +63,10 @@ $(".minus").hide()
 	})
 
 	$(".edit-confirm, .edit-start").click(function(){
-		$(".course-sidebar-box").fadeToggle();
-		$(".course-main-parent").toggleClass("col-md-10").toggleClass("full-width");
+		$(".course-sidebar-box").fadeToggle(function(){
+			$(".course-main-parent").toggleClass("full-width");
+		});
+		
 	})
 </script>
 <% end %>

@@ -24,7 +24,7 @@
 		<% current_user.classrooms.each_with_index do |classroom, index| %>
 									
 			  						<a class="btn dropdown-btn-navbar" href= "/classrooms/<%= classroom.id %>" target="nav-showpane-<%= index %>">
-			  							<%= classroom.num %>: <%= classroom.name %>
+			  							<%= classroom.num %>
 			  						</a>
 		  							<div class="hidden" id="nav-showpane-<%= index %>">
 										<%= classroom.intro %>
@@ -33,7 +33,7 @@
 		 <% Classenroll.where(user_id: current_user.id, ispassed: true).each_with_index do |classenroll, index| %>
 							<% classroom = classenroll.classroom %>
 			  						<a class="btn dropdown-btn-navbar" href= "/classrooms/<%= classroom.id %>" target="nav-showpane-<%= index %>s">
-			  							<%= classroom.num %>: <%= classroom.name %>
+			  							<%= classroom.num %>
 			  						</a>
 		  							<div class="hidden" id="nav-showpane-<%= index %>s">
 										<%= classroom.intro %>

@@ -38,7 +38,7 @@
 
 <!-- Load JS here for greater good =============================-->
 <script type="text/javascript">
-  !window.jQuery && document.write('<http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"><\/script>');
+  //!window.jQuery && document.write('<http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"><\/script>');
 </script>
 
 <!--script src="/assets/jquery-ui-1.10.3.custom.min.js"></script>
@@ -70,14 +70,13 @@ $(document).ready(function(){
     id = '#'+$(this).attr("target");
     showpane = $("#dropdown-btn-showpane");
     showpane.stop(stopAll=true,goToEnd=true);
-    showpane.hide();
-    showpane.html($(id).text().replace(/\n/g,'<br />'));
-
+    showpane.delay(500).fadeOut(function(){
+      showpane.html($(id).text().replace(/\n/g,'<br />'));
+      if(parseInt(showpane.css("height"))<260){
+        showpane.css('min-height' , '260px');
+      }
+    }).fadeIn();
     
-    if(parseInt(showpane.css("height"))<260){
-      showpane.css('min-height' , '260px');
-    }
-    showpane.fadeIn();
 
   },function(){}
   );
@@ -85,7 +84,6 @@ $(document).ready(function(){
 </script>
   
 
-<div class="hidden"><%= controller_name %></div>
 </body>
 </html>
  

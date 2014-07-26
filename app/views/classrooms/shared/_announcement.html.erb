@@ -37,19 +37,18 @@
 		isShow = $(this).prop('isShow');
 		target = $("#course-announce-new-pane");
 		if(isShow){
-			target.fadeOut(800, function(){
+			target.fadeOut(200, function(){
 				btn.text('New Announcement ')
 				target.html("")
 				target.fadeIn();
 			})
 		}else{
-			target.fadeTo(050, 0.05, function(){
+			target.fadeTo(50, 0.05, function(){
 				btn.text("-Hide new -")
 				target.html(
 				'<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src=<%= new_classannounce_path(:classroom => @classroom.id) %>></iframe></div>'
 				)
-				target.fadeTo(1500, 1);
-			})
+			}).fadeTo(200, 1);
 			
 		}
 		$(this).prop('isShow', !isShow)

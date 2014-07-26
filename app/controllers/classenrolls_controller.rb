@@ -30,12 +30,19 @@ class ClassenrollsController < ApplicationController
     build_params = classenroll_params
     build_params['user_id'] = current_user.id
     build_params['ista'] = false
-    build_params['ispassed'] = false
+    @classroom = Classroom.find_by(id: build_params['classroom_id'])
+    if @classroom.ispublic or (current_user.email.include? @classroom.condition)
+      build_params['ispassed'] = true
+      notice = 'Congratulations! You have successfully applied for this class :)'
+    else
+      build_params['ispassed'] = false
+      notice = 'You have successfully applied for this class. Wait for the teacher/TAs to confirm enrollment :)'
+    end
     @classenroll = current_user.classenrolls.build(build_params)
 
     respond_to do |format|
       if @classenroll.save
-        format.html { redirect_to classrooms_path, notice: 'Classenroll was successfully created.' }
+        format.html { redirect_to classrooms_path, notice: notice }
         format.json { render :show, status: :created, location: @classenroll }
       else
         format.html { render :new }

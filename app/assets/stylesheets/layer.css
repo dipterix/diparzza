@@ -25,6 +25,14 @@
 	min-height:500px;
 	position:relative;
 }
+@media(min-width: 1500px){
+	[role="main"]{
+		max-width:90%;
+	}
+	.container{
+		width: 90%;
+	}
+}
 [role="main"]{
 	font-size:1em;
 	line-height:1.4;

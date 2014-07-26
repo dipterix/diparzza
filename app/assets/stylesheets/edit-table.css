@@ -48,6 +48,7 @@ tr.otherline{
 	background-color: #ededed;
 	color: rgba(52, 75, 94, 0.3);
 	border: 0px solid transparent;
+	max-width: 50px;
 }
 .minus:hover{
 	color: rgba(52, 75, 94, 1);
