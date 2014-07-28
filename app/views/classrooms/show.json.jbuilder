@@ -14,6 +14,8 @@ unless @classroom.user!=current_user && Classenroll.find_by(user_id: current_use
 		html = render 'classrooms/shared/forum'
 	elsif params[:target]=='process'
 		html = render 'classrooms/shared/courseschedule'
+	elsif params[:target]=='storage'
+		html = render 'classrooms/shared/cloudstorage'
 	else
 		html = '<h6 class="align-center">This page is Under Construction</h6>'
 	end
