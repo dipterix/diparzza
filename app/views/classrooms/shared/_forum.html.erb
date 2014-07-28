@@ -1,5 +1,35 @@
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="http://dipterix.sinaapp.com/show?msg_type=0&user_id=<%= @classroom.id %>&user_name=<%= current_user.nickname %>" id="forum-frame">
+<!--div class="embed-responsive embed-responsive-16by9"-->
+  <iframe class="embed-responsive-item iframe-auto-height" src="http://dipterix.sinaapp.com/show?msg_type=0&user_id=<%= @classroom.id %>&user_name=<%= current_user.nickname %>" name="forum-frame" >
   	
   </iframe>
+<div id="forumcontent">
 </div>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+domain = "http://dipterix.sinaapp.com"
+$.ajax({
+	contentType: "application/json",
+    dataType: 'jsonp',
+    jsonp: 'jsonp_callback',
+    url: "http://dipterix.sinaapp.com/json",
+	data: {'msg_type': 3, 'user_id': 1, 'ammount': 99},
+    success: function(data){
+        // do stuff
+  		msgs = JSON.parse(data)
+      s = 
+"<div class='align-right'><h5>Hi, <%= current_user.nickname %></h5><p id='show-choice-pane'><a href='"+ domain +"/new?uid=<%= @classroom.id %>&user_name=<%= current_user.nickname %>&msg_type=3'><span class='glyphicon glyphicon-plus'></span> 新建</a></p></div><div id='show-main-body'>"
+      for(k in msgs.keys){
+        m = msgs.msg[msgs.keys[k]]
+        s += "<div id='"+ m['id'] +"' class='hline show-body-per'><div class='title'><h6>"+ m['title'] +" <small>by: "+ m['user_name'] +" <i>(#"+ m['created_at'] +")</i></small></h6></div><div class='contents'>"+ m['contents'] +"<br /><a href='"+ m['link'] +"'>View File</a></div></div>"
+  }
+s+="</div>"
+      $("#forumcontent").html(s)
+        
+    },
+});
+})
+</script>

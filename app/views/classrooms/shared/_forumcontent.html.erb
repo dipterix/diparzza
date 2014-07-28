@@ -1,0 +1,14 @@
+s = "<div class='align-right'>
+	<h5>Hi, <%= current_user.nickname %></h5>
+	<p id='show-choice-pane'>
+		<a href='/new?uid=<%= @classroom.id %>&user_name=<%= current_user.nickname %>&msg_type=3'><span class='glyphicon glyphicon-plus'></span> 新建</a> 
+	</p>
+</div>
+<div id='show-main-body'>"
+	for(m in msgs.msgs){
+		s += ("<div id='%s' class='hline show-body-per'>",m.id) + 
+			"<div class='title'>" +
+				("<h6>%s<small>by: %s <i>(#%s)</i></small></h6>",m.title,m.user_name,m.created_at)+
+			"</div></div>"
+	}
+s+="</div>"

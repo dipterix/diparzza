@@ -115,6 +115,7 @@ String.prototype.repeat = function(num) {
 
 
   $("document").ready(function(){
+    // sign in remember me btn
     $("#reg-remember").click(function(){
       color = ['#372f2b','#16a085']
       checked = $("#user_remember_me").prop("checked")
@@ -126,4 +127,8 @@ String.prototype.repeat = function(num) {
         $("#reg-remember").css('color', color[0])
       }
     })
+
+    // notification-pane auto disappear
+    $('.notification-pane').delay(3000).fadeOut(5000)
+
   })

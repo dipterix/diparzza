@@ -338,6 +338,7 @@ td{
 	max-width: 500px; 
 	word-wrap:break-word;
 	z-index: 100000;
+	cursor: pointer;
 }
 
 .pointer-cursor{

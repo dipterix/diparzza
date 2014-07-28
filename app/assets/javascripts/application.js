@@ -16,7 +16,7 @@
 //= require bootstrap
 //= require bootstrap-addons
 //= require flat-ui
-//= require turbolinks
+//require turbolinks	This one will make js malfunction sometimes
 //= require self-written
 
 

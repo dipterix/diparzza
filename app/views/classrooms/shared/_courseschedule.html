@@ -63,10 +63,11 @@ $(".minus").hide()
 	})
 
 	$(".edit-confirm, .edit-start").click(function(){
-		$(".course-sidebar-box").fadeToggle(function(){
-			$(".course-main-parent").toggleClass("full-width");
-		});
-		
+		$(".course-main-parent").fadeOut(function(){
+			$(".course-sidebar-box").fadeToggle(function(){
+				$(".course-main-parent").toggleClass("full-width").fadeIn();
+			});
+		})
 	})
 </script>
 <% end %>
