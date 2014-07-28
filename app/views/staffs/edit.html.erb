@@ -1,0 +1,84 @@
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+	<div class="hero-unit" role="main" >
+		<h6>Edit Status</h6>
+		<p class="separator">
+			<% @staff.user.nickname %>
+		</p>
+		<div class="align-left" style="max-width:800px;margin:0 auto;position:relative">
+		  	<p>
+		  		You are changing <strong><%= @staff.user.realname %>'s</strong> status. Here is the information:<br />
+			</p>
+			<div id="class-enroll-edit-list" class="row">
+
+						<div class="col-md-5">Nick Name:</div>
+						<div class="col-md-7"><%= @staff.user.nickname %> &nbsp;</div>
+
+						<div class="col-md-5">Full Name:</div>
+						<div class="col-md-7"><%= @staff.user.realname %> &nbsp;</div>
+
+			  			<div class="col-md-5">Email:</div>
+			  			<div class="col-md-7"><%= @staff.user.email %> &nbsp;</div>
+
+		  				<div class="col-md-5">Institution: </div>
+		  				<div class="col-md-7"><%= @staff.user.institution %> &nbsp;</div>
+
+		  				<div class="col-md-5">Teacher Status:</div>
+		  				<div class="col-md-7 pointer-cursor" id="enroll-edit-list-ta" val=<%= @staff.isactive %> target="form-ista"><%= @staff.isactive %> <i>(Click to change)</i></div>
+
+		  				<div class="col-md-5">*Admin Status:</div>
+		  				<div class="col-md-7 pointer-cursor" id="enroll-edit-list-passed" val=<%= @staff.isadmin %>  target="form-ispassed" ><%= @staff.isadmin %> <i>(Click to change)</i></div>
+
+		  	</div>
+
+		  	<p>
+		  		* Be careful to change admin status. If you want to change someone into an admin, he/she must be activated in "Teacher Status".
+		  	</p>
+		</div>
+<script type="text/javascript">
+	var tftoggle = function(){
+		val = $(this).attr('val')=='true'
+		target = $(this).attr('target')
+		$(this).html((!val) + '<i>(Click to change)</i>')
+		$(this).attr('val', !val);
+		$(this).css('color','red')
+		$("#"+target).prop('checked', !val)
+	}
+	$("#enroll-edit-list-ta").click(tftoggle)
+	$("#enroll-edit-list-passed").click(tftoggle)
+</script>
+
+
+<%= form_for(@staff) do |f| %>
+  <% if @staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@staff.errors.count, "error") %> prohibited this staff from being saved:</h2>
+
+      <ul>
+      <% @staff.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field hidden">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+
+    <%= f.label :'Teaching Status' %><br>
+    <%= f.check_box :isactive, id: "form-ista" %>
+
+    <%= f.label :isadmin %><br>
+    <%= f.check_box :isadmin, id: "form-ispassed" %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "Confirm Changes", class: "btn btn-info" %> | <%= link_to 'Disgard Changes', staffs_path %>
+  </div>
+<% end %>
+
+
+</div>

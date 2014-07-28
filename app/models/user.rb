@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :classrooms
   has_many :classenrolls
   has_many :classannounces
+  has_one :staff
 
   validates :email, presence: true
+
 end

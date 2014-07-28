@@ -1,0 +1,56 @@
+<%= staffs_error_messages! %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+	<div class="hero-unit" role="main" >
+		<h6>Teaching status change</h6>
+		<p class="separator"><%= current_user.nickname %></p>
+
+		<div class="align-left" style="max-width:600px;margin:0 auto;position:relative">
+		  	<p>
+		  		You are choosing to be a teacher. Here is the the privilage of becoming a teacher:<br />
+		  		<ul>
+		  			<li>Open at most 5 courses.</li>
+		  			<li>Enjoy personal cloud storage.</li>
+		  		</ul>
+		  		* After submittion, we will inform the administrator. Please wait :)<br />
+		  		* By Signin to the classroom, you agree to the <strong>Teacher agreement</strong>.<br />
+		  		* If you want to be an admin of this website, contact dipterix@mail.ustc.edu.cn
+		  	</p>
+		</div>
+		<div>
+			<%= form_for(@staff) do |f| %>
+			
+
+<!-- You won't change anything, this is just for display -->
+		<div class="hidden">
+			  <div class="field">
+			    <%= f.label :user_id %><br>
+			    <%= f.text_field :user_id, value: current_user.id %>
+			  </div>
+
+			  <div class="field">
+			    <%= f.label :'Teaching Status' %><br>
+			    <%= f.check_box :isactive %>
+			  </div>
+
+			  <div class="field">
+			    <%= f.label :isadmin %><br>
+			    <%= f.check_box :isadmin %>
+			  </div>
+		</div>
+
+			  <div class="actions">
+			    <%= f.submit "Let's go!", class: 'btn btn-info' %>
+			  </div>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+

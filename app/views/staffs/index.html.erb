@@ -1,0 +1,51 @@
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <h1>Staff List</h1>
+  <div class="float-right">
+    <a class="btn btn-warning" id="toggle-teacher">See admitted</a>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Teacher Status</th>
+        <th>Admin Status</th>
+        <th>Nick Name</th>
+        <th>Real Name</th>
+        <th>Institution</th>
+        <th>Email</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @staffs.each do |staff| %>
+        <% if not staff.issuper %>
+          <tr is-teacher="<%= staff.isactive %>" >
+            <td><%= staff.isactive %></td>
+            <td><%= staff.isadmin %></td>
+            <td><%= staff.user.nickname %></td>
+            <td><%= staff.user.realname %></td>
+            <td><%= staff.user.institution %></td>
+            <td><%= staff.user.email %></td>
+            <td><%= link_to 'Edit', edit_staff_path(staff) %></td>
+            <% if current_user.staff.issuper %>
+              <td><%= link_to 'Destroy', staff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+
+</div>
+
+<script type="text/javascript">
+  $("#toggle-teacher").click(function(){
+    $("[is-teacher = 'false']").fadeToggle()
+  })
+</script>

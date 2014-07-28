@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726090718) do
+ActiveRecord::Schema.define(version: 20140728104026) do
 
   create_table "classannounces", force: true do |t|
     t.integer  "user_id"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20140726090718) do
   end
 
   add_index "classrooms", ["user_id"], name: "index_classrooms_on_user_id"
+
+  create_table "staffs", force: true do |t|
+    t.boolean  "isactive"
+    t.boolean  "issuper"
+    t.boolean  "isadmin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "staffs", ["user_id"], name: "index_staffs_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

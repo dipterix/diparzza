@@ -10,7 +10,7 @@
           <label class="input-q-f1">Email Address:</label>
           <div class="input-group">
             <%= f.email_field :email, autofocus: true, value: current_user.email, class: "form-control flat", disabled: true %>
-            <label class="input-group-addon btn btn-info">Change it</label>
+            <label class="input-group-addon btn btn-info invisible">Change it</label>
           </div>
         </div>
 
@@ -19,32 +19,10 @@
         <% end %>
         
         <div class="input">
-          <label class="input-q-f1">Password:</label>
-          <div class="input-group">
-            <%= f.password_field :current_password, autocomplete: "off", placeholder: "Enter Your Original Password", class: "form-control flat" %>
-            <label class="input-group-addon btn btn-info">Change it</label>
-          </div>
-          <label class="input-q-f1"></label>
-        </div>
-        
-        <div class="input hidden">
-          <label class="input-q-f1">Change Your Password:</label>
-
-          <div class="input input-q-p2-left">
-            <%= f.password_field :password, autocomplete: "off", placeholder: "Your new Password", class: "form-control flat" %>
-          </div>
-          <div class="input input-q-p2-right">
-            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm Password", class: "form-control flat" %>
-            
-          </div>
-          
-        </div>
-        
-        <div class="input">
           <label class="input-q-f1">Nickname:</label>
           <div class="input-group">
             <%= f.text_field :nickname, autocomplete: "on", placeholder: "Enter Your Nickname. It will be shown to the others", value: current_user.nickname, class: "form-control flat" %>
-            <label class="input-group-addon">Change it</label>
+            <label class="input-group-addon invisible">Change it</label>
           </div>
         </div>
         
@@ -70,21 +48,28 @@
             <%= f.text_field :dept, autocomplete: "on", placeholder: "If you are a teacher, please enter your Department", value: current_user.dept, class: "form-control flat" %>
             <label class="input-group-addon invisible">Change it</label>
           </div>
-        </div>      
+        </div> 
 
-        <div class="input">      
-          <label class="input-q-f1">Teacher Status:</label>
-          <%= f.check_box :status, class: "switch has-switch" ,'data-toggle' => "switch", checked: current_user.status %>
-        </div>
+        <div class="input">
+          <label class="input-q-f1">Current Password:</label>
+          <div class="input-group">
+            <%= f.password_field :current_password, autocomplete: "off", placeholder: "Enter Your Original Password", class: "form-control flat" %>
+            <label class="input-group-addon btn btn-info">Change it</label>
+          </div>
+          <label class="input-q-f1"></label>
+        </div>     
             
         <%= f.submit "Confirm Changes", class: "btn btn-primary top-mg-10" %>
       </div>
       
       <% end %>
 
+        
 
 
-      <h1 class="page-header">Class Details</h1>
+      <h1 class="page-header">Class You Teach</h1>
+      
+<% if current_user.status || ((not current_user.staff.nil?) && current_user.staff.isactive) %>
       <div class="align-left">
         <% @current_user.classrooms.each do |classroom| %>
           <div class="course-list-box">
@@ -110,11 +95,34 @@
         <% end %>
         
         <%= link_to 'Open a New Classroom', new_classroom_path, class: "btn btn-primary top-mg-10" %>
-        
+
+<% else %>    
+    <h6>You need to become a teacher first</h6>
+      <div class="align-left"> 
+        <h6>Your Teacher Status: </h6>    
+          <% if current_user.staff.nil? %>
+            You haven't applied to be a teacher yet. Click 
+            <a target='_blank' href=<%= new_staff_path %> > here</a> to apply.
+          <% elsif not current_user.staff.isactive %>
+            <i> (You have submitted application. Please wait for admission)</i>
+          <% end %>
+          
+<%end%>
+        </div>
+      
       </div>
       
+
+<% if (not current_user.staff.nil?) && current_user.staff.isactive && (current_user.staff.issuper || current_user.staff.isadmin) %>
+      <h1 class="page-header">Diparzors</h1>
+      <div class="align-left">
+        Congratulations, you one of the administrators of Diparzza. Click <a href="<%= staffs_path %>">here</a> to manage people here.
+      </div>
+<% end %>
+
     </div>
-    </div>
+  </div>
     <!-- /.container -->
+
 
 

@@ -2,6 +2,7 @@ class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :check_teacher_status, only: [:new]
 
   # GET /classrooms
   # GET /classrooms.json
@@ -79,6 +80,12 @@ class ClassroomsController < ApplicationController
     def correct_user
       @classroom = current_user.classrooms.find_by(id:params[:id])
       redirect_to classrooms_path, notice: "Not authorized to edit this Class" if @classroom.nil?
+    end
+
+    def check_teacher_status
+      if (current_user.staff.nil? || (not current_user.staff.isactive))
+        redirect_to edit_user_registration_path, notice: "Please apply teacher status first. Contact dipterix@mail.ustc.edu if any questions"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
