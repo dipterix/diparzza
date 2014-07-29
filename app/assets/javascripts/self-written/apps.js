@@ -132,3 +132,11 @@ String.prototype.repeat = function(num) {
     $('.notification-pane').delay(3000).fadeOut(5000)
 
   })
+
+  var process_start = function(){
+      $("#processing").fadeIn()
+    }
+    var process_stop = function(){
+      $("#processing").stop(true,true)
+      $("#processing").fadeOut()
+    }

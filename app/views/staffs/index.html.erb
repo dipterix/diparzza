@@ -3,7 +3,9 @@
 <div class="container">
   <h1>Staff List</h1>
   <div class="float-right">
-    <a class="btn btn-warning" id="toggle-teacher">See admitted</a>
+    <a class="btn btn-success" id="show-all">See all</a>
+    <a class="btn btn-primary" id="show-teacher">See admitted</a>
+    <a class="btn btn-info" id="show-admin">Only admins</a>
   </div>
 
   <table class="table">
@@ -22,7 +24,7 @@
     <tbody>
       <% @staffs.each do |staff| %>
         <% if not staff.issuper %>
-          <tr is-teacher="<%= staff.isactive %>" >
+          <tr is-teacher="<%= staff.isactive %>" is-admin="<%= staff.isadmin %>" >
             <td><%= staff.isactive %></td>
             <td><%= staff.isadmin %></td>
             <td><%= staff.user.nickname %></td>
@@ -45,7 +47,14 @@
 </div>
 
 <script type="text/javascript">
-  $("#toggle-teacher").click(function(){
-    $("[is-teacher = 'false']").fadeToggle()
+  $("#show-teacher").click(function(){
+    $("[is-teacher = 'false']").fadeOut()
+    $("tr:not([is-teacher = 'false'])").fadeIn()
+  })
+  $("#show-admin").click(function(){
+    $("[is-admin = 'false']").fadeOut()
+  })
+  $("#show-all").click(function(){
+    $("tr").fadeIn()
   })
 </script>

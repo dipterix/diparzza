@@ -438,3 +438,32 @@ td{
 .list-bar-bar{
 	min-width: 85px;
 }
+.show-body-per{
+	border-right: 3px solid aliceblue;
+	margin-bottom: 10px;
+}
+.show-body-per-time{
+	padding-top: 70%
+}
+#processing{
+	width:100%;
+	position: fixed;
+	margin-top: 15%;
+	z-index: 100000;
+	text-align: center;
+	vertical-align: center;
+	pointer-events: none;
+}
+#processing div{
+	width: 240px;
+	height: 240px;
+	background-color: rgba(245,245,245,0.7);
+	margin: 0 auto;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding: 85px;
+	pointer-events: none;
+}
+
+

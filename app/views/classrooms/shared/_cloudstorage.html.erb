@@ -1,5 +1,89 @@
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="http://dipterix.sinaapp.com/show?msg_type=3&user_id=<%= @classroom.id %>&user_name=<%= current_user.nickname %>" name="forum-frame" >
-  	
-  </iframe>
+
+
+<% domain ||= "http://dipterix.vipsinaapp.com" %>
+
+<div class="embed-responsive embed-responsive-16by9" id="storage-frame">
+  <script type="text/javascript">
+	var iframe = document.createElement("iframe");
+	iframe.src = '<%= domain %>/show?msg_type=3&user_id=<%= @classroom.id %>&user_name=<%= current_user.nickname %>';
+	if (iframe.attachEvent){
+	    iframe.attachEvent("onload", function(){
+	        process_stop()
+	    });
+	} else {
+	    iframe.onload = function(){
+	        process_stop()
+	    };
+	}
+	document.getElementById('storage-frame').appendChild(iframe);
+	</script>
 </div>
+
+
+
+
+
+<!--div class='align-right col-md-11'>
+	<h5>Hi, <%= current_user.nickname %></h5>
+	<p id='show-choice-pane'>
+		<a href='<%= domain %>/new?uid=<%= @classroom.id %>&user_name=<%= current_user.nickname %>&msg_type=3'><span class='glyphicon glyphicon-plus'></span> 新建</a>
+	</p>
+</div>
+<div id='show-main-body'>
+	
+	<div class="col-md-offset-1" id="forumcontent">
+		<div>
+			<div id='1' class='hline show-body-per col-md-9'>
+				<div class='title'><h6>123<small>by:asd</small></h6>
+				</div>
+				<div class='contents'>content<br />
+					<a href='"+ m['link'] +"'>View File</a>
+				</div>
+			</div>
+			<div class='col-md-3 hide-on-tablets'> <i>(#"+ m['created_at'] +")</i>
+			</div>
+		</div>
+		<div>
+			<div id='1' class='hline show-body-per col-md-9'>
+				<div class='title'><h6>123<small>by:asd</small></h6>
+				</div>
+				<div class='contents'>content<br />
+					<a href='"+ m['link'] +"'>View File</a>
+				</div>
+			</div>
+			<div class='col-md-3 hide-on-tablets show-body-per-time'> <i>(#"+ m['created_at'] +")</i>
+			</div>
+		</div>
+	</div>
+
+	
+</div>
+
+
+
+<script type="text/javascript">
+function(){
+$.ajax({
+	contentType: "application/json",
+    dataType: 'jsonp',
+    jsonp: 'jsonp_callback',
+    url: "<%= domain %>/json",
+	data: {'msg_type': 3, 'user_id': 1, 'ammount': 99},
+    success: function(data){
+        // do stuff
+  		msgs = JSON.parse(data)
+      s = ""
+      for(k in msgs.keys){
+        m = msgs.msg[msgs.keys[k]]
+        s += "<p><div id='"+ m['id'] +"' class='hline show-body-per col-md-9'><div class='title'><h6>"+ m['title'] +" <small>by: "+ m['user_name'] +"</small></h6></div><div class='contents'>"+ m['contents'] +"<br /><a href='"+ m['link'] +"'>View File</a></div></div><div class='col-md-3 hide-on-tablets'> <i>(#"+ m['created_at'] +")</i></div></p>"
+  		}
+
+      //$("#forumcontent").html(s)
+        
+    },
+});
+}
+
+
+</script-->
+

@@ -22,6 +22,12 @@
   </head>
 <body role="body">
 
+<div id="processing" style="display:none">
+  <div>
+    <i class="icon-spinner icon-spin icon-4x pull-left"></i>
+  </div>
+</div>
+
 <!-- System information -->
 
 <div class="notification-pane">
@@ -34,35 +40,6 @@
 
 <%= yield %>
 
-
-
-<!-- Load JS here for greater good =============================-->
-<script type="text/javascript">
-  //!window.jQuery && document.write('<http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"><\/script>');
-</script>
-
-<!--script src="/assets/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="/assets/jquery.ui.touch-punch.min.js"></script>
-<script src="/assets/jquery.tagsinput.js"></script>
-<script src="/assets/jquery.placeholder.js"></script> 
-
-<!--script data-turbolinks-track="true" src="/assets/turbolinks.js?body=1"></script--
-<script data-turbolinks-track="true" src="/assets/pages.js?body=1"></script>
-<script data-turbolinks-track="true" src="/assets/respond.min.js?body=1"></script>
-<script data-turbolinks-track="true" src="/assets/typeahead.js?body=1"></script>
-
-
-    <script data-turbolinks-track="true" src="/assets/jquery_ujs.js?body=1"></script>
-    <script src="/assets/bootstrap.min.js"></script>
-    <script src="/assets/bootstrap-select.js"></script>
-    <script src="/assets/bootstrap-switch.js"></script>
-    <script src="/assets/flatui-checkbox.js"></script>
-    <script src="/assets/flatui-radio.js"></script>
-    
-
-
-
-<script data-turbolinks-track="true" src="/assets/application.js?body=1"></script-->
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -83,6 +60,8 @@ $(document).ready(function(){
 })
 </script>
   
+
+
 
 </body>
 </html>

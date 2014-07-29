@@ -66,6 +66,7 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 		$("#update_foobar").click();
   	}
 	$("label.btn-sidebar").click(function(){
+		process_start()
 		target = $(this).attr('target');
 		sessionStorage.classroomTarget = target
 		sessionStorage.classroom = <%= @classroom.id %>
@@ -92,4 +93,7 @@ $(".navbar-text").html("<i>Current class:</i> ( <%= @classroom.num %>-<%= @class
 	if(target != undefined && sessionStorage.classroom == <%= @classroom.id %>){
 		$("label.btn-sidebar[target='"+ target +"']").click()
 	}
+</script>
+<script type="text/javascript">
+  process_stop()
 </script>
